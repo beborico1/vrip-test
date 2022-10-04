@@ -38,7 +38,7 @@ function BrandProducts() {
                     <div className='flex justify-center'>
                         <img className="object-contain" alt="Product" src={product.data().images[0]}/>                    
                     </div>
-                    <div>
+                    <div className="mt-3">
                         <p className='font-bold text-center'>{product.data().name}</p>
                         <p className='text-center text-sm text-gray-500 line-clamp-2'>{product.data().description}</p>
                     </div>
