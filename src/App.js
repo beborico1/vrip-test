@@ -25,7 +25,7 @@ function App() {
       <div className='p-5'>
         <h1 className='text-2xl mb-4 font-semibold'>Brands:</h1>
         {brands.map(brand => (
-          <div className="rounded mb-3 items-center bg-white shadow-md px-7 py-5" key={brand.id}>
+          <div className="rounded-lg mb-3 items-center bg-white shadow-md px-7 py-5" key={brand.id}>
             <div className='flex mb-4 justify-between items-center'>
               <div className='flex'>
                 <img className="shadow-lg rounded-full h-12 w-12 mr-3 border" src={brand.data().icon_url}/>
@@ -35,7 +35,7 @@ function App() {
                 </div>
               </div>
               <div>
-                <a className="rounded-lg bg-gray-100 px-3 py-1.5 hover:bg-gray-700 hover:text-white text-sm font-semibold" href={brand.data().website}>Visit Website</a>
+                <a className="rounded-lg bg-gray-100 px-3 py-1.5 hover:bg-gray-200 text-sm font-semibold" href={brand.data().website}>Visit Website</a>
               </div>
             </div>
             <div className='text-sm'>
