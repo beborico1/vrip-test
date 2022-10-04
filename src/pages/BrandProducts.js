@@ -36,7 +36,7 @@ function BrandProducts() {
             {products.map(product => (
                 <div key={product.id} className="rounded-lg mr-4 mb-4 bg-white shadow-md px-7 py-5 content-center">
                     <div className='flex justify-center'>
-                        <img className="h-60 object-cover" alt="Product" src={product.data().images[0]}/>                    
+                        <img className="h-60 object-contain" alt="Product" src={product.data().images[0]}/>                    
                     </div>
                     <div>
                         <p className='font-bold text-center'>{product.data().name}</p>
