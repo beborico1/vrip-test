@@ -1,52 +1,66 @@
-import { collection, getDocs, limit, query, where } from 'firebase/firestore'
+import { collection, getDocs, limit, query, startAfter, where } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import Filter from '../components/Filter'
 import Header from '../components/Header'
+import Product from '../components/Product'
 import { db } from '../firebase-config'
 
 function BrandProducts() {
     const {brand} = useParams()
+    const [searchParams] = useSearchParams();
     const [products,setProducts] = useState([])
-    let [searchParams] = useSearchParams();
+    const [brandName,setBrandName] = useState("")
     const productsCollectionRef = collection(db,"products")
 
-    const getProducts = async(q) => {
-        const data = await getDocs(q)
-        setProducts(data.docs)
-    }
-
     useEffect(() => {
+        loadProducts()
+    },[searchParams])
+
+    const loadProducts = async () => {
         const gender = searchParams.get("gender")
         if (gender === null) {
             const q = query(productsCollectionRef, where("brand_id", "==", `${brand}`),limit(6))
-            getProducts(q)
+            const data = await getDocs(q)
+            setProducts(data.docs)
+            setBrandName(data.docs[0].data().brand_name)
         } else {
-            console.log(gender)
             const q = query(productsCollectionRef, where("brand_id", "==", `${brand}`),where("gender","==",`${gender}`),limit(6))
-            getProducts(q)
+            const data = await getDocs(q)
+            setProducts(data.docs)
+            setBrandName(data.docs[0].data().brand_name)
         }
-    },[searchParams])
-  
+    }
+
+    const loadMoreProducts = async () => {
+        const lastProduct = products[products.length-1]
+        const gender = searchParams.get("gender")
+        if (gender === null) {
+            const q = query(productsCollectionRef, where("brand_id", "==", `${brand}`),limit(6),startAfter(lastProduct))
+            const data = await getDocs(q)
+            setProducts([...products, ...data.docs])
+        } else {
+            const q = query(productsCollectionRef, where("brand_id", "==", `${brand}`),where("gender","==",`${gender}`),limit(6),startAfter(lastProduct))
+            const data = await getDocs(q)
+            setProducts([...products, ...data.docs])
+        }
+    }
+
   return (
     <div>
         <Header/>
         <Filter/>
-        <div className='p-5 grid grid-cols-2'>
+        <h1 className='text-2xl mt-3 text-center font-semibold'>{brandName}</h1>  
+        <div className='p-5 grid grid-cols-2 lg:grid-cols-3'>
             {products.map(product => (
-                <div key={product.id} className="rounded-lg mr-4 mb-4 bg-white shadow-md px-7 py-5 content-center">
-                    <div className='flex justify-center'>
-                        <img className="object-contain" alt="Product" src={product.data().images[0]}/>                    
-                    </div>
-                    <div className="mt-3">
-                        <p className='font-bold text-center'>{product.data().name}</p>
-                        <p className='text-center text-sm text-gray-500 line-clamp-2'>{product.data().description}</p>
-                    </div>
-                </div>
+                <Product
+                    key={product.id}
+                    product={product}
+                />
             ))}
         </div>
         <div className='flex justify-center mb-9'>
-            <button className='text-white bg-black px-3 py-1 rounded'>View More</button>
+            <button onClick={loadMoreProducts} className='text-white bg-black px-3 py-1 rounded'>View More</button>
         </div>
     </div>
   )
