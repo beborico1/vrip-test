@@ -50,7 +50,7 @@ function BrandProducts() {
     <div>
         <Header/>
         <Filter/>
-        <h1 className='text-2xl mt-3 text-center font-semibold'>{brandName}</h1>  
+        <h1 className='text-2xl mt-4 text-center font-semibold'>{brandName}</h1>  
         <div className='p-5 grid grid-cols-2 lg:grid-cols-3'>
             {products.map(product => (
                 <Product
