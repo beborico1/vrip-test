@@ -27,7 +27,7 @@ function Filter() {
 
   return (
     <div className="shadow-sm border-b bg-gray-100 sticky top-0 z-20">
-      <div className="flex justify-evenly max-w-6xl xl:mx-auto">
+      <div className="flex justify-evenly">
           <div className={`w-full ${men ? "bg-gray-300":""}`}>
             <button onClick={()=>handleClick("men")} className="w-full text-center border-r-2 my-1">Men</button>
           </div>
