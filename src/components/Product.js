@@ -7,8 +7,8 @@ function Product({product}) {
             <img className="object-contain" alt="Product" src={product.data().images[0]}/>                    
         </div>
         <div className="mt-3">
-            <p className='font-bold text-center'>{product.data().name}</p>
-            <p className='text-center text-sm text-gray-500 line-clamp-3'>{product.data().description}</p>
+            <p className='font-bold text-center line-clamp-1'>{product.data().name}</p>
+            <p className='text-center text-sm text-gray-500 line-clamp-3 mt-3'>{product.data().description}</p>
         </div>
     </div>
   )
