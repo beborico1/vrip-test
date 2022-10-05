@@ -50,8 +50,8 @@ function BrandProducts() {
     <div>
         <Header/>
         <Filter/>
-        <h1 className='text-2xl mt-4 text-center font-semibold'>{brandName}</h1>  
-        <div className='p-5 grid grid-cols-2 lg:grid-cols-3'>
+        <h1 className='text-2xl mt-4 mb-4 text-center font-semibold'>{brandName}</h1>  
+        <div className='px-1 grid grid-cols-2 lg:grid-cols-3'>
             {products.map(product => (
                 <Product
                     key={product.id}
@@ -59,7 +59,7 @@ function BrandProducts() {
                 />
             ))}
         </div>
-        <div className='flex justify-center mb-9'>
+        <div className='flex justify-center mb-9 mt-8'>
             <button onClick={loadMoreProducts} className='text-white bg-black px-3 py-1 rounded'>View More</button>
         </div>
     </div>
