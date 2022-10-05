@@ -16,20 +16,24 @@ function Filter() {
 
   useEffect(() => {
     const gender = searchParams.get("gender")
+      setWomen(false)
+      setMen(false)
       if (gender === "women") {
         setWomen(true)
-        setMen(false)
       } else if (gender === "men") {
         setMen(true)
-        setWomen(false)
       }
   },[searchParams])
 
   return (
     <div className="shadow-sm border-b bg-gray-100 sticky top-0 z-20">
-      <div className="flex justify-evenly max-w-6xl mx-5 xl:mx-auto py-1">
-          <button onClick={()=>handleClick("men")} className="w-full text-center border-r-2">Men</button>
-          <button onClick={()=>handleClick("women")} className="w-full text-center">Women</button>
+      <div className="flex justify-evenly max-w-6xl xl:mx-auto">
+          <div className={`w-full ${men ? "bg-gray-300":""}`}>
+            <button onClick={()=>handleClick("men")} className="w-full text-center border-r-2 my-1">Men</button>
+          </div>
+          <div className={`w-full ${women ? "bg-gray-300":""}`}>
+            <button onClick={()=>handleClick("women")} className="w-full text-center my-1">Women</button>
+          </div>
       </div>
     </div>
   )
