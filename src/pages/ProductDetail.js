@@ -21,6 +21,7 @@ function ProductDetail() {
             const product_data=productSnap.data()
             setProduct(product_data)
             setImages(product_data.imgs_1080)
+            console.log(product_data.imgs_1080)
         } else {
             console.log("No such document!");
         }
@@ -41,21 +42,20 @@ function ProductDetail() {
                     
                     <h1 className='font-bold'>{product.name}</h1>
                     <p className='mb-5 text-center text-sm text-gray-700'>{product.description}</p>
+                    <div className='h-full w-full'>
+                        <Slide className="">
+                            {images.map(image => (
+                                <div className='bg-red' key={image}>  
+                                    <img className='object-cover w-full' src={image}/>
+                                    <p className='text-white line-clamp-1'>{image}</p>
+                                </div>
+                            ))}
+                        </Slide>
+                    </div>
                 </div>
                 <br/>
 
-                <div className='w-full h-full'>
-                    <Slide className="h-full w-full">
-                        {images.map(img => (
-                            <div className="each-fade" key={img}>
-                                <div className='image-container'>
-                                    <img src={img}/>
-                                </div>
-                            </div>
-                        ))}
-                    </Slide>
-                </div>
-
+                
                 <div className='text-center text-sm text-gray-700 mt-6 mb-5'>
                         <b className=''>By:</b>
                         <span className=''> {product.brand_name}</span>
