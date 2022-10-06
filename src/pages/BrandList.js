@@ -42,7 +42,7 @@ function BrandList() {
             </div>
             <Link to={`/${brand.id}`}>
               <div>
-                <button className='font-semibold w-full py-2 hover:text-gray-800'>View Products</button>
+                <button className='font-semibold w-full py-2 hover:text-gray-800'>Visit</button>
               </div>
             </Link>
           </div>

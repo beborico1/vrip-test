@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Routes>
           <Route strict exact path="/" element={<BrandList/>}/>
-          <Route strict exact path="/:brand" element={<BrandProducts/>}/>
+          <Route strict exact path="/:brand_id" element={<BrandProducts/>}/>
           <Route strict exact path="/:brand_id/:product_id" element={<ProductDetail/>}/>
         </Routes>
     </div>
