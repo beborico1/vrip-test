@@ -59,8 +59,8 @@ function BrandProducts() {
     <div>
         <Header/>
         <Filter/>
-        <div className='bg-white rounded-lg mx-4 mt-4'>
-            <div className='p-8'>
+        <div className='bg-white rounded-lg mx-2 mt-4'>
+            <div className='p-6'>
                 <div className='flex mb-4 justify-between items-center'>
                     <div className='flex'>
                       <img alt="" className="shadow-lg rounded-full h-12 w-12 mr-3 border" src={brand.icon_url}/>
