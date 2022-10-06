@@ -35,11 +35,11 @@ function ProductDetail() {
         <div>
             <div className='m-3 p-5 bg-white rounded shadow-md'>
                 <Link to={`/${brand_id}`}><b className='hover:text-gray-700 mb-5'>{"Go back"}</b></Link>
-                <div className='mb-5 mt-5'>
+                <div className='my-5'>
                     <Slide>
                         {images.map(image => (
-                            <div className="">
-                                <img className='object-contain h-80 w-full' src={image}/>
+                            <div className="w-full flex flex-col items-center">
+                                <img className='object-cover h-80 w-80' src={image}/>
                             </div>
                         ))}
                         
