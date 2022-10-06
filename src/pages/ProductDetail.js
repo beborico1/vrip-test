@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { db } from '../firebase-config'
 import Video from 'react-responsive-video'
-import { Slide } from 'react-slideshow-image'
+import { Zoom } from 'react-slideshow-image'
 import 'react-slideshow-image/dist/styles.css';
 
 function ProductDetail() {
@@ -36,14 +36,14 @@ function ProductDetail() {
             <div className='m-3 p-5 bg-white rounded shadow-md'>
                 <Link to={`/${brand_id}`}><b className='hover:text-gray-700 mb-5'>{"Go back"}</b></Link>
                 <div className='my-5 bg-red-400'>
-                    <Slide className="bg-red-300">
+                    <Zoom className="bg-red-300">
                         {images.map(image => (
                             <div className="w-full flex flex-col items-center bg-red-200">
-                                <img className='object-cover h-80 w-80 bg-red-100' src={image}/>
+                                <img alt="Product photo" className='object-cover h-80 w-80 bg-red-100' src={image}/>
                             </div>
                         ))}
                         
-                    </Slide>
+                    </Zoom>
                 </div>
 
                 <div className='flex flex-col items-center space-y-3'>
