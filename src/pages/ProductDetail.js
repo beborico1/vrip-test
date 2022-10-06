@@ -1,8 +1,11 @@
 import { doc, getDoc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Header from '../components/Header'
 import { db } from '../firebase-config'
+import Video from 'react-responsive-video'
+
+import { Slide } from 'react-slideshow-image'
+import 'react-slideshow-image/dist/styles.css';
 
 function ProductDetail() {
     const {brand_id,product_id} = useParams()
@@ -33,7 +36,7 @@ function ProductDetail() {
                 <Link to={`/${brand_id}`}><b className='hover:text-gray-700'>{"Go back"}</b></Link>
                 <div className='flex flex-col items-center space-y-3'>
                     {product.video_src==="" ? (<div></div>):(<div>
-                        <iframe autoplay className="aspect-auto w-full" src={product.video_src}></iframe>
+                        <Video className="w-60" mp4={product.video_src}/>
                     </div>)}
                     
                     <h1 className='font-bold'>{product.name}</h1>
@@ -41,10 +44,16 @@ function ProductDetail() {
                 </div>
                 <br/>
 
-                <div className='grid grid-cols-3'>
-                    {images.map(img => (
-                        <img className='' src={img}/>
-                    ))}
+                <div className='w-full h-full'>
+                    <Slide className="h-full w-full">
+                        {images.map(img => (
+                            <div className="each-fade" key={img}>
+                                <div className='image-container'>
+                                    <img src={img}/>
+                                </div>
+                            </div>
+                        ))}
+                    </Slide>
                 </div>
 
                 <div className='text-center text-sm text-gray-700 mt-6 mb-5'>
