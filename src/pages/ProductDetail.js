@@ -33,7 +33,7 @@ function ProductDetail() {
                 <Link to={`/${brand_id}`}><b className='hover:text-gray-700'>{"Go back"}</b></Link>
                 <div className='flex flex-col items-center space-y-3'>
                     {product.video_src==="" ? (<div></div>):(<div>
-                        <iframe autoplay className="aspect-auto h-96 w-48" src={product.video_src}></iframe>
+                        <iframe autoplay className="aspect-auto w-full" src={product.video_src}></iframe>
                     </div>)}
                     
                     <h1 className='font-bold'>{product.name}</h1>
