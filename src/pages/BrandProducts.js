@@ -95,10 +95,15 @@ function BrandProducts() {
                 ))}
             </div>
         </div>
-
-        <div ref={bottomRef} className='flex justify-center mb-9 mt-8'>
+        <div ref={bottomRef}/>
+        {
+            /*
+            <div ref={bottomRef} className='flex justify-center mb-9 mt-8'>
                 <button onClick={loadMoreProducts} className='text-white bg-black px-3 py-1 rounded'>View More</button>
-        </div>
+            </div>
+            */
+        }
+        
     </div>
   )
 }
