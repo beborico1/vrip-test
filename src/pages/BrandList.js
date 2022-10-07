@@ -22,7 +22,7 @@ function BrandList() {
       <Header/>
       <div className='p-2 mt-2'>
         {brands.map(brand => (
-          <div className="rounded-lg mb-3 items-center bg-white shadow-md px-5 py-5" key={brand.id}>
+          <div className="rounded-lg mb-3 items-center bg-white shadow-md px-7 py-5" key={brand.id}>
             <div className='flex mb-4 justify-between items-center'>
               <Link to={`/${brand.id}`}>
                 <div className='flex'>

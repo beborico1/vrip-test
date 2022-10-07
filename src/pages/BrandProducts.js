@@ -1,19 +1,23 @@
 import { doc, collection, getDoc, getDocs, limit, query, startAfter, where } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import Filter from '../components/Filter'
 import Header from '../components/Header'
 import Product from '../components/Product'
 import { db } from '../firebase-config'
+import useOnScreen from "../hooks/useOnScreen"
 
 function BrandProducts() {
     const {brand_id} = useParams()
-    const [searchParams] = useSearchParams();
+    const [searchParams] = useSearchParams()
     const [products,setProducts] = useState([])
     const [brand,setBrand] = useState({})
     const productsCollectionRef = collection(db,`products`)
     const brandRef = doc(db,`brands/${brand_id}`)
     
+    const bottomRef = useRef();
+    const reachedBottom = useOnScreen(bottomRef)
+
     useEffect(() => {
         const getBrand = async() => {
             const data = await getDoc(brandRef)
@@ -54,9 +58,13 @@ function BrandProducts() {
             setProducts([...products, ...data.docs])
         }
     }
-
+    
+    useEffect(() => {
+        loadMoreProducts()
+    },[reachedBottom])
   return (
     <div>
+        
         <Header/>
         <Filter/>
         <div className='bg-white rounded-lg mx-2 mt-4'>
@@ -88,10 +96,9 @@ function BrandProducts() {
             </div>
         </div>
 
-        <div className='flex justify-center mb-9 mt-8'>
+        <div ref={bottomRef} className='flex justify-center mb-9 mt-8'>
                 <button onClick={loadMoreProducts} className='text-white bg-black px-3 py-1 rounded'>View More</button>
         </div>
-        
     </div>
   )
 }
