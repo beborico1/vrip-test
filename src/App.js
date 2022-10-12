@@ -3,6 +3,7 @@ import BrandList from './pages/BrandList'
 import './App.css'
 import BrandProducts from './pages/BrandProducts';
 import ProductDetail from './pages/ProductDetail';
+import EditProduct from './pages/EditProduct';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
           <Route strict exact path="/" element={<BrandList/>}/>
           <Route strict exact path="/:brand_id" element={<BrandProducts/>}/>
           <Route strict exact path="/:brand_id/:product_id" element={<ProductDetail/>}/>
-        </Routes>
+          <Route strict exact path="/:brand_id/:product_id/edit" element={<EditProduct/>}/>
+      </Routes>
     </div>
   )
 }

@@ -12,7 +12,7 @@ function ProductDetail() {
     const [images,setImages] = useState([])
     const [moreInfo,setMoreInfo] = useState(false)
     
-    const productRef = doc(db,`products/${product_id}`)
+    const productRef = doc(db,`brands/${brand_id}/products/${product_id}`)
 
     const loadProduct = async() => {
         const productSnap = await getDoc(productRef)
@@ -20,8 +20,8 @@ function ProductDetail() {
         if (productSnap.exists()) {
             const product_data=productSnap.data()
             setProduct(product_data)
-            setImages(product_data.imgs_1080)
-            console.log(product_data.imgs_1080)
+            setImages(product_data.imgs_large)
+            console.log(product_data.imgs_large)
         } else {
             console.log("No such document!");
         }
@@ -39,10 +39,9 @@ function ProductDetail() {
                     <Zoom>
                         {images.map(image => (
                             <div className='flex flex-col items-center'>
-                                <img alt="Product" className='object-cover h-80 w-80' src={image}/>            
+                                <img alt="Product" className='object-cover w-80' src={image}/>            
                             </div>
                         ))}
-                        
                     </Zoom>
                 </div>
 
@@ -83,9 +82,14 @@ function ProductDetail() {
                     </div>
                 </div>
 
-                                
-                <p className='w-full text-center mb-4 mt-4 font-medium'>$ {product.price_float} usd</p> 
+                <div className='w-full flex flex-col items-center my-4'>
+                    <Link to={`/${brand_id}/${product_id}/edit`}>
+                        <b className='text-sm'>≡ Edit</b>
+                    </Link>
+                </div>
 
+                <p className='w-full text-center mb-4 mt-4 font-medium'>$ {product.price_float} usd</p> 
+                
                 <div className='flex justify-center'>
                     <a className='bg-black text-white rounded-lg px-4 py-1' href={product.buy_url}>Buy</a>
                 </div>

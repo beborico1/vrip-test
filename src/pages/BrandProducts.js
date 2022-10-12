@@ -12,7 +12,7 @@ function BrandProducts() {
     const [searchParams] = useSearchParams()
     const [products,setProducts] = useState([])
     const [brand,setBrand] = useState({})
-    const productsCollectionRef = collection(db,`products`)
+    const productsCollectionRef = collection(db,`brands/${brand_id}/products`)
     const brandRef = doc(db,`brands/${brand_id}`)
     
     const bottomRef = useRef();
@@ -35,11 +35,11 @@ function BrandProducts() {
     const loadProducts = async () => {
         const gender = searchParams.get("gender")
         if (gender === null) {
-            const q = query(productsCollectionRef, where("brand_id", "==", `${brand_id}`),limit(12))
+            const q = query(productsCollectionRef,limit(12))
             const data = await getDocs(q)
             setProducts(data.docs)
         } else {
-            const q = query(productsCollectionRef, where("brand_id", "==", `${brand_id}`),where("gender","==",`${gender}`),limit(12))
+            const q = query(productsCollectionRef, where("gender","==",`${gender}`),limit(12))
             const data = await getDocs(q)
             setProducts(data.docs)
         }
@@ -70,7 +70,7 @@ function BrandProducts() {
         <div className='bg-white rounded-lg mx-2 mt-4'>
             <div className='p-6'>
                 <div className='flex mb-4 justify-between items-center'>
-                    <div className='flex'>
+                    <div className='flex cursor-pointer'>
                       <img alt="" className="shadow-lg rounded-full h-12 w-12 mr-3 border" src={brand.icon_url}/>
                       <div>
                         <h3 className='font-medium'>{brand.name}</h3>
