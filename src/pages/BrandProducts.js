@@ -12,6 +12,7 @@ function BrandProducts() {
     const [searchParams] = useSearchParams()
     const [products,setProducts] = useState([])
     const [brand,setBrand] = useState({})
+    const [moreProductsToLoad,setMoreProductsToLoad] = useState(true)
     const productsCollectionRef = collection(db,`brands/${brand_id}/products`)
     const brandRef = doc(db,`brands/${brand_id}`)
     
@@ -37,10 +38,16 @@ function BrandProducts() {
         if (gender === null) {
             const q = query(productsCollectionRef,limit(12))
             const data = await getDocs(q)
+            if (data.docs.length===0){
+                setMoreProductsToLoad(false)
+            }
             setProducts(data.docs)
         } else {
             const q = query(productsCollectionRef, where("gender","==",`${gender}`),limit(12))
             const data = await getDocs(q)
+            if (data.docs.length===0){
+                setMoreProductsToLoad(false)
+            }
             setProducts(data.docs)
         }
     }
@@ -51,10 +58,16 @@ function BrandProducts() {
         if (gender === null) {
             const q = query(productsCollectionRef, where("brand_id", "==", `${brand_id}`),limit(12),startAfter(lastProduct))
             const data = await getDocs(q)
+            if (data.docs.length===0){
+                setMoreProductsToLoad(false)
+            }
             setProducts([...products, ...data.docs])
         } else {
             const q = query(productsCollectionRef, where("brand_id", "==", `${brand_id}`),where("gender","==",`${gender}`),limit(12),startAfter(lastProduct))
             const data = await getDocs(q)
+            if (data.docs.length===0){
+                setMoreProductsToLoad(false)
+            }
             setProducts([...products, ...data.docs])
         }
     }
@@ -96,6 +109,8 @@ function BrandProducts() {
             </div>
         </div>
         <div ref={bottomRef}/>
+        {moreProductsToLoad ? (<div className='w-full text-center text-xl my-3'>Loading...</div>):(<></>)}
+        
         {
             /*
             <div ref={bottomRef} className='flex justify-center mb-9 mt-8'>

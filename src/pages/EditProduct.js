@@ -95,6 +95,7 @@ function EditProduct() {
                     ):(<div></div>)}
                 </div>
                 </div>):(<div></div>)}
+                <div className="text-red-600 font-bold">Delete Product</div>
             </div>
         </div>
   )
